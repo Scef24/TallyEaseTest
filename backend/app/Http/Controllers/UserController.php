@@ -88,4 +88,21 @@ class UserController extends Controller
 
         return response()->json(['user' => $user], 201);
     }
+    public function index()
+    {
+
+        $committees = User::where('role', 'committee')->get(['id', 'name', 'email', 'role']);
+        return response()->json(['committees' => $committees], 200);
+    }
+    public function destroy($id)
+    {
+        $user = User::where('role', 'committee')->find($id);
+
+        if ($user) {
+            $user->delete();
+            return response()->json(['message' => 'Committee member deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Committee member not found'], 404);
+        }
+    }
 }

@@ -12,6 +12,7 @@ Route::post('register',[UserController::class,'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('games', GameController::class);
     Route::apiResource('committees', UserController::class);
+    // Route::get('/committees', [UserController::class, 'getCommittees']);
     Route::post('games/{game}/committees/{committee}', [GameController::class, 'assignCommittee']);
 });
 
